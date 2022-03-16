@@ -39,4 +39,8 @@ public class UsuarioService {
     public boolean existsByNombreusuario(String nombreUsuario){
         return usuarioRepository.existsByNombreUsuario(nombreUsuario);
     }
+    public boolean delete(int id){
+                usuarioRepository.delete(usuarioRepository.getOne(id));
+                return true;
+    }
 }

@@ -1,11 +1,13 @@
 package com.parking.modelo;
 
 import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 @Entity
+@AllArgsConstructor @NoArgsConstructor @Builder @Getter @Setter
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,35 +18,9 @@ public class Producto {
     @Min(value = 1)
     private float precio;
 
-    public Producto() {
-    }
-
     public Producto(String nombre, float precio) {
         this.nombre = nombre;
         this.precio = precio;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public float getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
 }

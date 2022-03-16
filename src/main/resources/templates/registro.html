@@ -22,7 +22,7 @@
             </ul>
         </div>
         <div class="card-body">
-            <form th:action="@{/usuario/registrar}" method="post" sec:authorize="!isAuthenticated()">
+            <form th:action="@{/usuario/registrar}" method="post" sec:authorize="isAuthenticated()">
                 <!-- control ataque csrf -->
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <!-- fin control ataque csrf -->
