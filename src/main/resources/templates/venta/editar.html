@@ -19,41 +19,62 @@
                 <!-- fin control ataque csrf -->
                 <div class="form-group">
                     <label for="nombreCliente">Nombre del cliente</label>
-                    <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" required="required" autocomplete="off" th:value="${venta.nombreCliente}">
+                    <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" required="required"  th:value="${venta.nombreCliente}">
                 </div>
                 <div class="form-group">
                     <label for="cedulaCliente">cedula cliente </label>
-                    <input type="text" class="form-control" id="cedulaCliente" name="cedulaCliente" required="required" autocomplete="off" th:value="${venta.cedulacliente}">
+                    <input type="text" class="form-control" id="cedulaCliente" name="cedulaCliente" required="required"  th:value="${venta.cedulaCliente}">
                 </div>
                 <div class="form-group">
                     <label for="telefonoCliente">telefonoCliente</label>
-                    <input type="text" class="form-control" id="telefonoCliente" name="telefonoCliente" required="required" autocomplete="off" th:value="${venta.telefonoCliente}">
+                    <input type="text" class="form-control" id="telefonoCliente" name="telefonoCliente" required="required"  th:value="${venta.telefonoCliente}">
                 </div>
                 <div class="form-group">
                     <label for="marcaVehiculo">marca vehiculo </label>
-                    <input type="text" class="form-control" id="marcaVehiculo" name="marcaVehiculo" required="required" autocomplete="off" th:value="${venta.marcaVehiculo}">
+                    <input type="text" class="form-control" id="marcaVehiculo" name="marcaVehiculo" required="required"  th:value="${venta.marcaVehiculo}">
                 </div>
                 <div class="form-group">
                     <label for="placaVehiculo">placaVehiculo </label>
-                    <input type="text" class="form-control" id="placaVehiculo" name="placaVehiculo" required="required" autocomplete="off" th:value="${venta.placaVehiculo}">
+                    <input type="text" class="form-control" id="placaVehiculo" name="placaVehiculo" required="required"  th:value="${venta.placaVehiculo}">
                 </div>
                 <div class="form-group">
                     <label for="tipoVehiculo">tipoVehiculo </label>
-                    <input type="text" class="form-control" id="tipoVehiculo" name="tipoVehiculo" required="required" autocomplete="off" th:value="${venta.tipoVehiculo}">
+                    <input type="text" class="form-control" id="tipoVehiculo" name="tipoVehiculo" required="required"  th:value="${venta.tipoVehiculo}">
                 </div>
                 <div class="form-group">
                     <label for="horaEntrada">horaEntrada </label>
-                    <input type="datetime-local" class="form-control" id="horaEntrada" name="horaEntrada" required="required" autocomplete="off" th:value="${#dates.format(venta.horaEntrada, 'yyyy-MM-dd''T''HH:mm')}">
+                    <input type="datetime-local" class="form-control" id="horaEntrada" name="horaEntrada" required="required"  th:value="${#dates.format(venta.horaEntrada, 'yyyy-MM-dd''T''HH:mm')}">
                 </div>
                 <div class="form-group">
-                    <label for="horaSalida">horaEntrada </label>
-                    <input type="datetime-local" class="form-control" id="horaSalida" name="horaSalida" required="required" autocomplete="off" th:value="${#dates.format(venta.horaSalida, 'yyyy-MM-dd''T''HH:mm')}">
+                    <label for="horaSalida">horaSalida </label>
+                    <input type="datetime-local" class="form-control" id="horaSalida" name="horaSalida"  required th:value="${#dates.format(venta.horaSalida, 'yyyy-MM-dd''T''HH:mm')}">
                 </div>
 
                 <div class="form-group">
-                    <label for="valorVenta">horaEntrada </label>
-                    <input type="datetime-local" class="form-control" id="valorVenta" name="valorVenta" required="required" autocomplete="off" th:value="${#dates.format(venta.horaSalida, 'yyyy-MM-dd''T''HH:mm')}">
+                    <label for="valorVenta">valorVenta </label>
+                    <input type="number" class="form-control" id="valorVenta" name="valorVenta" autocomplete="off" th:value="${venta.valorVenta}">
                 </div>
+
+
+                <div class="form-group">
+                    <label for="valorVenta">Empleado </label>
+                    <select class="form-control" id="id_empleado" name="id_empleado" required>
+                        <th:block th:each="empleado : ${empleados}">
+                            <option th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="valorVenta">Producto </label>
+                    <select class="form-control" id="id_producto" name="id_producto" required>
+                        <th:block th:each="producto : ${productos}">
+                            <option th:text="${producto.nombre}" th:value="${producto.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
+
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-outline-success btn-block">
                         <i class="fas fa-sync-alt"></i> Actualizar</button>

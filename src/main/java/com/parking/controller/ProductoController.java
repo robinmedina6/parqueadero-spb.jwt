@@ -3,6 +3,8 @@ package com.parking.controller;
 import com.parking.modelo.Producto;
 import com.parking.service.ProductoService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ public class ProductoController {
     @Autowired
     ProductoService productoService;
 
+    Logger log = LoggerFactory.getLogger(this.getClass());
+    
     @GetMapping("lista")
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
@@ -53,6 +57,7 @@ public class ProductoController {
             return mv;
         }
         Producto producto = new Producto(nombre, precio);
+        log.info("se ingreso a actualizar producto :" + producto.toString());
         productoService.save(producto);
         mv.setViewName("redirect:/producto/lista");
         return mv;
@@ -107,6 +112,8 @@ public class ProductoController {
 
         producto.setNombre(nombre);
         producto.setPrecio(precio);
+
+        log.info("se ingreso a actualizar producto :" + producto.toString());
         productoService.save(producto);
         return new ModelAndView("redirect:/producto/lista");
     }
@@ -115,6 +122,8 @@ public class ProductoController {
     @GetMapping("/borrar/{id}")
     public ModelAndView borrar(@PathVariable("id")int id){
         if(productoService.existsById(id)){
+
+            log.info("se ingreso a borrar producto :" + id);
             productoService.delete(id);
             return new ModelAndView("redirect:/producto/lista");
         }

@@ -44,7 +44,10 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" th:href="@{/venta/lista}">
-                                <i class="far fa-list-alt"></i> Lista</a>
+                                <i class="far fa-list-alt"></i> Lista Actual</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/venta/pagina/1/id/asc}">
+                                <i class="far fa-list-alt"></i> Lista Completa</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" th:href="@{/venta/nuevo}">
                                 <i class="fas fa-plus-circle"></i> Nueva venta</a>
@@ -56,10 +59,10 @@
                             <i class="fas fa-toolbox"></i> Empleados
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" th:href="@{/usuario/list}">
+                            <a class="dropdown-item" th:href="@{/empleado/lista}">
                                 <i class="far fa-list-alt"></i> Lista</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" th:href="@{/usuario/registro}">
+                            <a class="dropdown-item" th:href="@{/empleado/nuevo}">
                                 <i class="fas fa-plus-circle"></i> Nuevo usuario</a>
                         </div>
                     </li>
