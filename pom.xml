@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tutorial</groupId>
-	<artifactId>crud</artifactId>
+	<artifactId>parqueo-art</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>crud</name>
-	<packaging>war</packaging>
-	<description>Demo project for Spring Boot</description>
+	<name>Parqueadero</name>
+	<packaging>jar</packaging>
+	<description>parqueadero</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -90,11 +90,17 @@
 	</dependencies>
 
 	<build>
-		<finalName>monolito</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<!--<source>1.8</source>
+                    <target>1.8</target>-->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -44,7 +44,7 @@ public class VentaController {
     @GetMapping("lista")
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/venta/lista");
+        mv.setViewName("venta/lista");
         List<Venta> ventas = ventaService.listHoy();
         for (Venta venta: ventas) {
 
@@ -59,7 +59,7 @@ public class VentaController {
     @GetMapping("nuevo")
     public ModelAndView nuevo(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/venta/nuevo");
+        mv.setViewName("venta/nuevo");
         listaProductos = productoService.list();
         listaEmpleados = empleadoService.list();
         mv.addObject("productos", listaProductos);
@@ -102,7 +102,7 @@ public class VentaController {
         if(!ventaService.existsById(id))
             return new ModelAndView("redirect:/venta/lista");
         Venta venta = ventaService.getOne(id).get();
-        ModelAndView mv = new ModelAndView("/venta/detalle");
+        ModelAndView mv = new ModelAndView("venta/detalle");
         mv.addObject("venta", venta);
         mv.addObject("productos", listaProductos);
         mv.addObject("empleados", listaEmpleados);
@@ -116,7 +116,7 @@ public class VentaController {
         if(!ventaService.existsById(id))
             return new ModelAndView("redirect:/venta/lista");
         Venta venta = ventaService.getOne(id).get();
-        ModelAndView mv = new ModelAndView("/venta/editar");
+        ModelAndView mv = new ModelAndView("venta/editar");
         mv.addObject("venta", venta);
 
         listaProductos = productoService.list();
@@ -198,7 +198,7 @@ public class VentaController {
     public ModelAndView listarVentas(@PathVariable("numeroPagina") Integer numeroPagina,
                                     @PathVariable("campoOrden") String campoOrden, @PathVariable("sentidoOrden") String sentidoOrden) {
 
-        ModelAndView mav = new ModelAndView("/venta/listaVentas");
+        ModelAndView mav = new ModelAndView("venta/listaVentas");
 
         /*
          * Total de elementos por pagina

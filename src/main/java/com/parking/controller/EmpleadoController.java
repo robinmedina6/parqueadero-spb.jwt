@@ -24,7 +24,7 @@ public class EmpleadoController {
     @GetMapping("lista")
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/empleado/lista");
+        mv.setViewName("empleado/lista");
         List<Empleado> empleados = empleadoService.list();
         mv.addObject("empleados", empleados);
         return mv;
@@ -63,7 +63,7 @@ public class EmpleadoController {
         if(!empleadoService.existsById(id))
             return new ModelAndView("redirect:/empleado/lista");
         Empleado empleado = empleadoService.getOne(id).get();
-        ModelAndView mv = new ModelAndView("/empleado/detalle");
+        ModelAndView mv = new ModelAndView("empleado/detalle");
         mv.addObject("empleado", empleado);
         return mv;
     }
@@ -74,7 +74,7 @@ public class EmpleadoController {
         if(!empleadoService.existsById(id))
             return new ModelAndView("redirect:/empleado/lista");
         Empleado empleado = empleadoService.getOne(id).get();
-        ModelAndView mv = new ModelAndView("/empleado/editar");
+        ModelAndView mv = new ModelAndView("empleado/editar");
         mv.addObject("empleado", empleado);
         return mv;
     }

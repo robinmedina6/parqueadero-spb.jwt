@@ -25,7 +25,7 @@ public class ProductoController {
     @GetMapping("lista")
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/producto/lista");
+        mv.setViewName("producto/lista");
         List<Producto> productos = productoService.list();
         mv.addObject("productos", productos);
         return mv;
@@ -68,7 +68,7 @@ public class ProductoController {
         if(!productoService.existsById(id))
             return new ModelAndView("redirect:/producto/lista");
         Producto producto = productoService.getOne(id).get();
-        ModelAndView mv = new ModelAndView("/producto/detalle");
+        ModelAndView mv = new ModelAndView("producto/detalle");
         mv.addObject("producto", producto);
         return mv;
     }
@@ -79,7 +79,7 @@ public class ProductoController {
         if(!productoService.existsById(id))
             return new ModelAndView("redirect:/producto/lista");
         Producto producto = productoService.getOne(id).get();
-        ModelAndView mv = new ModelAndView("/producto/editar");
+        ModelAndView mv = new ModelAndView("producto/editar");
         mv.addObject("producto", producto);
         return mv;
     }
