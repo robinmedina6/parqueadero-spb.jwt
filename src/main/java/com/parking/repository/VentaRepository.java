@@ -18,4 +18,8 @@ public interface VentaRepository extends JpaRepository<Venta, Integer> {
             nativeQuery = true)
     Optional<List<Venta>> findByHoraEntradaHoy(String fecha);
 
+    @Query(value = "SELECT * FROM venta WHERE placa_vehiculo LIKE(?1)",
+            nativeQuery = true)
+    Optional<List<Venta>> findByPlacaLike(String placa);
+
 }

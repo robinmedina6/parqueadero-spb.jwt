@@ -46,11 +46,6 @@ public class VentaController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("venta/lista");
         List<Venta> ventas = ventaService.listHoy();
-        for (Venta venta: ventas) {
-
-            log.info(venta.toString());
-
-        }
         mv.addObject("ventas", ventas);
         return mv;
     }
@@ -162,7 +157,14 @@ public class VentaController {
 
         double precio = 0;
         if(venta.getProducto().getNombre().equals("parqueadero")) {
-            precio = HelperUtils.restarCalendar(horaEntrada, horaSalida).getTimeInMillis() / 1000 / 60 / 60;
+            log.info("he:"+ horaEntrada.getTimeInMillis()+":hs:"+horaSalida.getTimeInMillis());
+            precio = HelperUtils.restarCalendar(horaEntrada, horaSalida).getTimeInMillis();
+            precio = precio /1000;
+            precio = precio / 60;
+            precio = precio / 60;
+
+            precio = Math.ceil(precio);
+
             if (tipoVehiculo.equals("camion")) {
                 precio = precio * 5000;
             } else if (tipoVehiculo.equals("automovil")) {
@@ -170,6 +172,7 @@ public class VentaController {
             } else if (tipoVehiculo.equals("moto")) {
                 precio = precio * 2000;
             }
+
         }else {
             precio= venta.getProducto().getPrecio();
         }
@@ -221,6 +224,65 @@ public class VentaController {
         log.info("Muestra vista listaVentas.html con resutados");
 
         return mav;
+
+    }
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/buscar")
+    public ModelAndView buscar()  {
+        ModelAndView mv = new ModelAndView();
+
+        listaProductos = productoService.list();
+        listaEmpleados = empleadoService.list();
+        mv.addObject("productos", listaProductos);
+        mv.addObject("empleados", listaEmpleados);
+
+        log.info("se ingreso a buscar");
+        mv.setViewName("venta/buscar");
+        return mv;
+    }
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/encontrar")
+    public ModelAndView encontrar(@RequestParam String nombreCliente,
+                              @RequestParam String cedulaCliente,
+                              @RequestParam String telefonoCliente,
+                              @RequestParam String marcaVehiculo,
+                              @RequestParam String placaVehiculo,
+                              @RequestParam String tipoVehiculo,
+                              @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") Calendar horaEntrada,
+                              @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") Calendar horaSalida,
+                              @RequestParam Double valorVenta,
+                              @RequestParam int id_empleado,
+                              @RequestParam int id_producto
+    ) throws ParseException {
+        ModelAndView mv = new ModelAndView("venta/busqueda");
+        Venta venta = Venta.builder().nombreCliente(nombreCliente)
+                .cedulaCliente(cedulaCliente)
+                .telefonoCliente(telefonoCliente)
+                .marcaVehiculo(marcaVehiculo).placaVehiculo(placaVehiculo).tipoVehiculo(tipoVehiculo)
+                .horaEntrada(horaEntrada)
+                .empleado(null)
+                .producto(null).build();
+
+        if(id_empleado!=0){
+            venta.setEmpleado(empleadoService.getOne(id_empleado).get());
+        }
+
+        if(id_producto!=0){
+            venta.setProducto(productoService.getOne(id_producto).get());
+        }
+        List<Venta> ventas = ventaService.listByFields(venta);
+        double sumatoria=0;
+        for (Venta vta: ventas) {
+            sumatoria += null!=vta.getValorVenta() ? vta.getValorVenta() : 0  ;
+        }
+        mv.addObject("ventas", ventas);
+        mv.addObject("sumatoria", sumatoria);
+        log.info("se ingreso a actualizar:");
+        return mv;
 
     }
 

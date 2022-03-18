@@ -243,7 +243,7 @@ public class HelperUtils {
     }
 
     public static Calendar restarCalendar(Calendar fechaInicial, Calendar fechaFinal){
-        Date fecha =new Date(fechaFinal.getTimeInMillis()- fechaInicial.getTimeInMillis());
+        Date fecha =new Date(fechaFinal.getTimeInMillis() - fechaInicial.getTimeInMillis());
         Calendar fechaCalendar=   Calendar.getInstance();
         fechaCalendar.setTime(fecha);
         return fechaCalendar;
@@ -278,4 +278,10 @@ public class HelperUtils {
                 localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond());
         return calendar;
     }
+
+    public static String convertCalendarToStringMysql(Calendar fechaInicial){
+        Date fecha =new Date(fechaInicial.getTimeInMillis());
+        return obtenerFechaMySql(fecha);
+    }
+
 }

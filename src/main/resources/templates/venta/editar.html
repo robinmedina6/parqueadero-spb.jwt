@@ -57,19 +57,19 @@
 
 
                 <div class="form-group">
-                    <label for="valorVenta">Empleado </label>
+                    <label for="id_empleado">Empleado </label>
                     <select class="form-control" id="id_empleado" name="id_empleado" required>
                         <th:block th:each="empleado : ${empleados}">
-                            <option th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
+                            <option th:text="${empleado.nombre}" th:value="${empleado.id}" th:selected="${empleado.id==venta.empleado.id}"></option>
                         </th:block>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="valorVenta">Producto </label>
+                    <label for="id_producto">producto </label>
                     <select class="form-control" id="id_producto" name="id_producto" required>
                         <th:block th:each="producto : ${productos}">
-                            <option th:text="${producto.nombre}" th:value="${producto.id}"></option>
+                            <option th:text="${producto.nombre}" th:value="${producto.id}" th:selected="${producto.id==venta.producto.id}"></option>
                         </th:block>
                     </select>
                 </div>

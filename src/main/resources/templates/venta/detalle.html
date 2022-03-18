@@ -12,66 +12,36 @@
             Detalles de la Venta
         </div>
         <div class="card-body">
-            <input type="hidden" name="id" id="id" th:value="${venta.id}">
+
+            <p class="card-text" th:text="'Nombre Cliente: ' + ${venta.nombreCliente}"></p>
+            <p class="card-text" th:text="'cedula Cliente:' + ${venta.cedulaCliente}"></p>
+            <p class="card-text" th:text="'telefono Cliente:' + ${venta.telefonoCliente}"></p>
+            <p class="card-text" th:text="'marca vehiculo:'+ ${venta.marcaVehiculo}"></p>
+            <p class="card-text" th:text="'placa  vehiculo:' + ${venta.placaVehiculo}"></p>
+            <p class="card-text" th:text="'tipo vehiculo:' + ${venta.tipoVehiculo}"></p>
+            <p class="card-text"  th:text="'hora entrada: '+  ${#dates.format(venta.horaEntrada, 'yyyy-MM-dd''T''HH:mm')}"></p>
+            <p  class="card-text" th:text="'hora salida:' + ${#dates.format(venta.horaSalida, 'yyyy-MM-dd''T''HH:mm')}"></p>
+            <p  class="card-text" th:text="'venta Empleado:' + ${venta.empleado}!=null? ${venta.empleado.nombre}:''"></p>
+            <p  class="card-text" th:text="'venta producto: ' + ${venta.producto}!=null? ${venta.producto.nombre}:''"></p>
+            <p  class="card-text" th:text="'valor venta:' + ${venta.valorVenta}"></p>
 
 
-            <!-- control ataque csrf -->
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <!-- fin control ataque csrf -->
-            <div class="form-group">
-                <label for="nombreCliente">Nombre del cliente</label>
-                <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" required="required"
-                        th:value="${venta.nombreCliente}">
-            </div>
-            <div class="form-group">
-                <label for="cedulaCliente">cedula cliente </label>
-                <input type="text" class="form-control" id="cedulaCliente" name="cedulaCliente" required="required"
-                        th:value="${venta.cedulaCliente}">
-            </div>
-            <div class="form-group">
-                <label for="telefonoCliente">telefonoCliente</label>
-                <input type="text" class="form-control" id="telefonoCliente" name="telefonoCliente" required="required"
-                        th:value="${venta.telefonoCliente}">
-            </div>
-            <div class="form-group">
-                <label for="marcaVehiculo">marca vehiculo </label>
-                <input type="text" class="form-control" id="marcaVehiculo" name="marcaVehiculo" required="required"
-                        th:value="${venta.marcaVehiculo}">
-            </div>
-            <div class="form-group">
-                <label for="placaVehiculo">placaVehiculo </label>
-                <input type="text" class="form-control" id="placaVehiculo" name="placaVehiculo" required="required"
-                        th:value="${venta.placaVehiculo}">
-            </div>
-            <div class="form-group">
-                <label for="tipoVehiculo">tipoVehiculo </label>
-                <input type="text" class="form-control" id="tipoVehiculo" name="tipoVehiculo" required="required"
-                        th:value="${venta.tipoVehiculo}">
-            </div>
-            <div class="form-group">
-                <label for="horaEntrada">horaEntrada </label>
-                <input type="datetime-local" class="form-control" id="horaEntrada" name="horaEntrada"
-                       required="required" 
-                       th:value="${#dates.format(venta.horaEntrada, 'yyyy-MM-dd''T''HH:mm')}">
-            </div>
-            <div class="form-group">
-                <label for="horaSalida">horaSalida </label>
-                <input type="datetime-local" class="form-control" id="horaSalida" name="horaSalida" 
-                       th:value="${#dates.format(venta.horaSalida, 'yyyy-MM-dd''T''HH:mm')}">
-            </div>
+            <a th:onclick="imprimir();" class="">
+                <i class="fas fa-solid fa-print"></i>
+            </a>
 
-            <div class="form-group">
-                <label for="valorVenta">valorVenta </label>
-                <input type="number" class="form-control" id="valorVenta" name="valorVenta" 
-                       th:value="${venta.valorVenta}">
-            </div>
-            <a th:href="@{/producto/lista}" class="btn btn-outline-info">
-                <i class="fas fa-arrow-circle-left"></i> Volver
+            <a th:href="@{/producto/lista}" class="">
+                <i class="fas fa-arrow-circle-left"></i>
             </a>
         </div>
     </div>
 </div>
 
+<script th:inline="javascript">
+    function imprimir(){
+        print();
+    }
+</script>
 <footer th:insert="fragments :: footer"></footer>
 <div th:insert="fragments :: scripts"></div>
 </body>

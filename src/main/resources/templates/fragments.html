@@ -22,11 +22,11 @@
                         <a class="nav-link" th:href="@{/}">
                             <i class="fas fa-home"></i> Inicio <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active" sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+                    <!--<li class="nav-item active" sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
                         <a class="nav-link" th:href="@{/producto/lista}">
                             <i class="far fa-list-alt"></i> Lista</a>
-                    </li>
-                    <li class="nav-item dropdown active" sec:authorize="hasRole('ROLE_ADMIN')">
+                    </li>-->
+                    <li class="nav-item dropdown active" sec:authorize="isAuthenticated()">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-toolbox"></i> productos
                         </a>
@@ -34,11 +34,11 @@
                             <a class="dropdown-item" th:href="@{/producto/lista}">
                                 <i class="far fa-list-alt"></i> Lista</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" th:href="@{/producto/nuevo}">
+                            <a class="dropdown-item" sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" th:href="@{/producto/nuevo}">
                                 <i class="fas fa-plus-circle"></i> Nuevo Producto</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown active" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="nav-item dropdown active" sec:authorize="isAuthenticated()">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-toolbox"></i> Ventas
                         </a>
@@ -48,6 +48,8 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" th:href="@{/venta/pagina/1/id/asc}">
                                 <i class="far fa-list-alt"></i> Lista Completa</a>
+                            <a class="dropdown-item" th:href="@{/venta/buscar}">
+                                <i class="far fa-list-alt"></i> Buscar</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" th:href="@{/venta/nuevo}">
                                 <i class="fas fa-plus-circle"></i> Nueva venta</a>
