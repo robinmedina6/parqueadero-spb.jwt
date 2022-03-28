@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,10 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf()
+                .ignoringAntMatchers("/person/**")
+                .and()
+                .authorizeRequests()
                 //da acceso a las imagenes ver atcommonlocations
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/", "/index", "/error", "/fragments", "/forbidden", "/login", "/usuario/registro")
+                .antMatchers("/","/person/**", "/index", "/error", "/fragments", "/forbidden", "/login", "/usuario/registro")
                 .permitAll()
                 .antMatchers("/usuario/registrar")
                 .permitAll()

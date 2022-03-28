@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments :: headerfiles">
+</head>
+<body>
+<header th:insert="fragments :: nav"></header>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-10 py-3">
+
+            <h2 class="text-center py-3">Spring Boot JPA Paging and Sorting</h2>
+
+            <h6>Total de registros: <span th:text="${totalElementos}"></span></h6>
+
+            <table class="table table-bordered table-striped table-sm">
+                <thead>
+                <tr>
+                    <th class="text-center " scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='id',sentidoOrden=${tipoSentidoOrden})}">Id <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='nombreCliente',sentidoOrden=${tipoSentidoOrden})}">Nombre <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='cedulaCliente',sentidoOrden=${tipoSentidoOrden})}">cedula <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='telefonoCliente',sentidoOrden=${tipoSentidoOrden})}">telefono <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='marcaVehiculo',sentidoOrden=${tipoSentidoOrden})}">marcaVehiculo <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='placaVehiculo',sentidoOrden=${tipoSentidoOrden})}">placa <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='tipoVehiculo',sentidoOrden=${tipoSentidoOrden})}">tipo <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='horaEntrada',sentidoOrden=${tipoSentidoOrden})}">entrada <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='horaSalida',sentidoOrden=${tipoSentidoOrden})}">salida <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='empleado',sentidoOrden=${tipoSentidoOrden})}">empleado <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='producto',sentidoOrden=${tipoSentidoOrden})}">producto <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th class="text-center" scope="col">
+                        <a th:href="@{/venta/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}/(numeroPagina=${numeroPagina},campoOrden='valorVenta',sentidoOrden=${tipoSentidoOrden})}">valor <i th:classappend="${tipoSentidoOrden eq 'asc' ? 'fas fa-sort-down' : 'fas fa-sort-up'}" class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+                    <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="venta : ${listaVentas}">
+                    <td class="text-center" th:text="${venta.id}"></td>
+                    <td th:text="${venta.nombreCliente}"></td>
+                    <td class="text-center" th:text="${venta.cedulaCliente}"></td>
+                    <td th:text="${venta.telefonoCliente}"></td>
+                    <td class="text-center" th:text="${venta.marcaVehiculo}"></td>
+                    <td th:text="${venta.placaVehiculo}"></td>
+                    <td th:text="${venta.tipoVehiculo}"></td>
+                    <td th:text="${#dates.format(venta.horaEntrada, 'yyyy-MM-dd''T''HH:mm')}"></td>
+                    <td th:text="${#dates.format(venta.horaSalida, 'yyyy-MM-dd''T''HH:mm')}"></td>
+                    <td th:text="${venta.empleado}!=null? ${venta.empleado.nombre}:''"></td>
+                    <td th:text="${venta.producto}!=null? ${venta.producto.nombre}:''"></td>
+                    <td th:text="${venta.valorVenta}"></td>
+                    <td><a th:href="@{'/venta/detalle/' + ${venta.id}}"><button class="btn btn-outline-primary"><i class="far fa-eye"></i></button></a></td>
+                    <td sec:authorize="hasRole('ROLE_USER')"><a th:href="@{'/venta/editar/' + ${venta.id}}"><button class="btn btn-outline-warning"><i class="far fa-edit"></i></button></a></td>
+                    <td sec:authorize="hasRole('ROLE_USER')"><a th:href="@{'/venta/borrar/' + ${venta.id}}"><button class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></button></a></td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <div>&nbsp;</div>
+
+            <div class="row">
+                <div class="col-md-12" th:if="${totalPaginas > 1}">
+                    <nav aria-label="Page navigation example" th:if="${totalPaginas gt 0}">
+                        <ul class="pagination">
+
+                            <li class="page-item" th:if="${numeroPagina > 1}">
+                                <a class="page-link" th:href="@{/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}(numeroPagina=1,campoOrden=${campoOrden},sentidoOrden=${tipoSentidoOrden eq 'desc'}  ? 'asc' : 'desc')}" aria-label="Primero" title="Primero">Primero</a>
+                            </li>
+
+                            <li class="page-item" th:if="${numeroPagina > 1}" th:classappend="${ numeroPagina > totalPaginas} ? 'disabled' ">
+                                <a class="page-link" th:href="@{/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}(numeroPagina=${numeroPagina-1},campoOrden=${campoOrden},sentidoOrden=${tipoSentidoOrden eq 'desc'}  ? 'asc' : 'desc')}" aria-label="Anterior" title="Anterior">Anterior</a>
+                            </li>
+
+                            <li class="page-item" th:classappend="${i eq numeroPagina} ? 'active'" th:each="i : ${#numbers.sequence( numeroPagina , totalPaginas > 10 + numeroPagina ? numeroPagina + 10 : totalPaginas, 1)}">
+                                <a class="page-link" th:href="@{/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}(numeroPagina=${i},campoOrden=${campoOrden},sentidoOrden=${tipoSentidoOrden eq 'desc'}  ? 'asc' : 'desc')}" th:text="${i}" th:title="${'Página '+ i}" rel="tooltip"></a>
+                            </li>
+
+                            <li class="page-item disabled" th:if="${numeroPagina + 10 < totalPaginas}">
+                                <a class="page-link svg-icon" href="#">
+                                    <span data-feather="more-horizontal" width="20" height="20">...</span>
+                                </a>
+                            </li>
+
+                            <li class="page-item" th:if="${numeroPagina < totalPaginas}" th:classappend="${numeroPagina eq totalPaginas} ? 'disabled'">
+                                <a class="page-link svg-icon" th:href="@{/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}(numeroPagina=${numeroPagina+1},campoOrden=${campoOrden},sentidoOrden=${tipoSentidoOrden eq 'desc'}  ? 'asc' : 'desc')}" aria-label="Siguiente" title="Siguiente" rel="tooltip">
+                                    <span aria-hidden="true" data-feather="chevrons-right" width="20" height="20">Siguiente</span>
+                                </a>
+                            </li>
+
+                            <li class="page-item" th:if="${numeroPagina < totalPaginas}" th:classappend="${numeroPagina eq totalPaginas} ? 'disabled'">
+                                <a class="page-link"  th:href="@{/pagina/{numeroPagina}/{campoOrden}/{sentidoOrden}(numeroPagina=${totalPaginas},campoOrden=${campoOrden},sentidoOrden=${tipoSentidoOrden eq 'desc'}  ? 'asc' : 'desc')}" aria-label="Último" title="Último">Último</a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/venta/nuevo}">
+        <button class="btn btn-outline-success btn-lg">
+            <i class="fas fa-plus-circle"></i> Nueva Venta</button></a>
+</div>
+
+<footer th:insert="fragments :: footer"></footer>
+<div th:insert="fragments :: scripts"></div>
+</body>
+</html>

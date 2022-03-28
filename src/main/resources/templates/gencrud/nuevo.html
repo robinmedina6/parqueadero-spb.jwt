@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:insert="fragments :: headerfiles">
+</head>
+<body>
+<header th:insert="fragments :: nav"></header>
+
+<div class="container">
+   <div class="row">
+       <div class="col-md-4 mx-auto">
+           <h5 class="mb-4">Nuevo</h5>
+           <form th:action="@{save}" id="formobject"  method="post" onsubmit="registrar(event, this)" >
+
+               <th:block th:each="campo : ${listaCampos}">
+                   <div class="form-group">
+                       <label th:for="${campo.name}" th:text="${campo.name}"></label>
+                       <input th:maxlength="${campo.size}" th:required="${campo.required}" th:type="${campo.type}"  class="form-control" th:id="${campo.name}" th:name="${campo.name}"  >
+                   </div>
+               </th:block>
+
+
+               <div class="form-group">
+                   <button type="submit" class="btn btn-outline-success btn-block">
+                       <i class="far fa-save"></i> Guardar</button>
+               </div>
+           </form>
+           <a th:href="@{/venta/lista}" style="text-decoration: none;"><button class="btn btn-outline-info btn-block">
+               <i class="fas fa-arrow-circle-left"></i> Volver</button></a>
+
+           <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+               <p th:text="${error}"></p>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+       </div>
+   </div>
+</div>
+
+<script>
+
+async function registrar(ev, data){
+
+    ev.preventDefault();
+	const datad = new FormData(document.getElementById('formobject'));
+	const value = Object.fromEntries(datad.entries());;
+	action =$('form').attr('action');
+    const res = await fetch(action, {
+        body: JSON.stringify(value, null, 2),
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        },
+        method: "POST"
+    });
+	resjson = await res.json();
+	console.log(resjson);
+	if(resjson.status==2){
+		window.location.assign(resjson.urlRedirect);
+	}else{
+		alert("informa:"+ resjson.error )
+	}
+	
+	
+}
+</script>
+
+<footer th:insert="fragments :: footer"></footer>
+<div th:insert="fragments :: scripts"></div>
+</body>
+</html>

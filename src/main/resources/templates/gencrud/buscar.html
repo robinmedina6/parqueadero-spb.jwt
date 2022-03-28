@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments :: headerfiles">
+</head>
+<body>
+<header th:insert="fragments :: nav"></header>
+
+<div class="container">
+   <div class="row">
+       <div class="col-md-4 mx-auto">
+           <h5 class="mb-4">Buscar venta</h5>
+           <form th:action="@{/venta/encontrar}" method="post">
+               <div class="form-group">
+                   <!-- control ataque csrf -->
+                   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                   <!-- fin control ataque csrf -->
+                   <label for="nombreCliente">Nombre del cliente</label>
+                   <input type="text" class="form-control" id="nombreCliente" name="nombreCliente"  >
+               </div>
+               <div class="form-group">
+                   <label for="cedulaCliente">cedula cliente </label>
+                   <input type="text" class="form-control" id="cedulaCliente" name="cedulaCliente"  >
+               </div>
+               <div class="form-group">
+                   <label for="telefonoCliente">telefonoCliente</label>
+                   <input type="text" class="form-control" id="telefonoCliente" name="telefonoCliente"  >
+               </div>
+               <div class="form-group">
+                   <label for="marcaVehiculo">marca vehiculo </label>
+                   <input type="text" class="form-control" id="marcaVehiculo" name="marcaVehiculo"  >
+               </div>
+               <div class="form-group">
+                   <label for="placaVehiculo">placaVehiculo </label>
+                   <input type="text" class="form-control" id="placaVehiculo" name="placaVehiculo"  >
+               </div>
+               <div class="form-group">
+                   <label for="tipoVehiculo">tipoVehiculo </label>
+                   <input type="text" class="form-control" id="tipoVehiculo" name="tipoVehiculo"  >
+               </div>
+               <div class="form-group">
+                   <label for="horaEntrada">horaEntrada </label>
+                   <input type="datetime-local" class="form-control" id="horaEntrada" name="horaEntrada"  >
+               </div>
+               <div class="form-group">
+                   <label for="horaSalida">horaSalida </label>
+                   <input type="datetime-local" class="form-control" id="horaSalida" name="horaSalida" >
+               </div>
+               <div class="form-group">
+                   <label for="valorVenta">valorVenta </label>
+                   <input type="number" class="form-control" id="valorVenta" name="valorVenta"  >
+               </div>
+
+               <div class="form-group">
+                   <label for="valorVenta">Empleado </label>
+                   <select class="form-control" id="id_empleado" name="id_empleado" required>
+                       <option value="0">Ninguno</option>
+                       <th:block th:each="empleado : ${empleados}">
+                           <option th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
+                       </th:block>
+                   </select>
+               </div>
+
+               <div class="form-group">
+                   <label for="valorVenta">Producto </label>
+                   <select class="form-control" id="id_producto" name="id_producto" required>
+                       <option value="0">Ninguno</option>
+                       <th:block th:each="producto : ${productos}">
+                           <option th:text="${producto.nombre}" th:value="${producto.id}"></option>
+                       </th:block>
+                   </select>
+               </div>
+
+               <div class="form-group">
+                   <button type="submit" class="btn btn-outline-success btn-block">
+                       <i class="far fa-save"></i> Buscar</button>
+               </div>
+           </form>
+           <a th:href="@{/venta/lista}" style="text-decoration: none;"><button class="btn btn-outline-info btn-block">
+               <i class="fas fa-arrow-circle-left"></i> Volver</button></a>
+
+           <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+               <p th:text="${error}"></p>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+       </div>
+   </div>
+</div>
+
+<footer th:insert="fragments :: footer"></footer>
+<div th:insert="fragments :: scripts"></div>
+</body>
+</html>
